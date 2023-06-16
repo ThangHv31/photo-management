@@ -1,13 +1,12 @@
-import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { PaginationParams } from 'src/base/pagination-param';
 import { Public } from 'src/const/constants';
+import { PhotoReactionsService } from 'src/photo-reaction/photo-reactions.service';
 import { PhotoService } from 'src/photos/photo.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserService } from './user.service';
-import { AlbumService } from 'src/album/album.service';
-import { ReactionDto } from './dto/reaction.dto';
-import { PhotoReactionsService } from 'src/photo-reaction/photo-reactions.service';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('user')
 @ApiBearerAuth()
@@ -23,12 +22,8 @@ export class UserController {
   async getUser() {
     return this.userService.getUser();
   }
-  @Post('/signup')
-  createUser(@Body() userDto: CreateUserDto) {
-    return this.userService.createUser(userDto);
-  }
   @Put('/:id')
-  updateUser(@Param('id') id: number, @Body() userDto: CreateUserDto) {
+  updateUser(@Param('id') id: number, @Body() userDto: UpdateUserDto) {
     return this.userService.updateUser(id, userDto);
   }
 
@@ -43,11 +38,5 @@ export class UserController {
   @Get('/:id/albums')
   async getAlbumByUser(@Param('id') id: number, @Query() { offset, limit }: PaginationParams) {
     return await this.userService.getUserPhoto(id, offset, limit);
-  }
-
-  // Like photo
-  @Post()
-  async likePhoto(@Body() reactionDto: ReactionDto) {
-    return this.photoReactionsService.reactPhoto(reactionDto);
   }
 }

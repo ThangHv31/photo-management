@@ -22,16 +22,19 @@ export class AuthController {
   @Post('login')
   @Public()
   async signIn(@Body() signInDto: CreateUserDto, @Session() session: any) {
-    const res = await this.authService.signIn(
-      signInDto.email,
-      signInDto.password,
-    );
-    session.userId = res.user.id;
+    const res = await this.authService.signIn(signInDto.email, signInDto.password);
+    session.userId = res.id;
     return res;
   }
   @UseGuards(AuthGuard)
   @Get('profile')
   getProfile(@Request() req) {
     return req.user;
+  }
+
+  @Post('/signup')
+  @Public()
+  createUser(@Body() userDto: CreateUserDto) {
+    return this.authService.signUp(userDto.email, userDto.password);
   }
 }

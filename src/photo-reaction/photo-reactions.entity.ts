@@ -11,6 +11,6 @@ export class PhotoReactions extends BaseEntity {
   photoId: number;
   @Column()
   liked: boolean;
-  @Column()
+  @Column({ nullable: true })
   comment: String;
 }

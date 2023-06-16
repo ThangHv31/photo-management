@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Get,
   Param,
@@ -39,7 +40,5 @@ export class PhotoController {
   }
 
   @Get('/new-feed')
-  async getNewFeed(){
-    
-  }
+  async getNewFeed() {}
 }

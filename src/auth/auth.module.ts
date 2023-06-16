@@ -15,7 +15,6 @@ import { AuthService } from './auth.service';
       signOptions: { expiresIn: '3600000000000000s' },
     }),
     UserModule,
-    // TypeOrmModule.forFeature([User])
   ],
   providers: [
     AuthService,

@@ -1,11 +1,11 @@
 import { Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AlbumModule } from 'src/album/album.module';
+import { PhotoReactionsModule } from 'src/photo-reaction/photo-reactions.module';
 import { PhotoModule } from 'src/photos/photo.module';
 import { UserController } from './user.controller';
 import { User } from './user.entity';
 import { UserService } from './user.service';
-import { PhotoReactionsModule } from 'src/photo-reaction/photo-reactions.module';
 
 @Module({
   imports: [

@@ -5,12 +5,14 @@ import { UserModule } from 'src/user/user.module';
 import { PhotoController } from './photo.controller';
 import { Photo } from './photo.entity';
 import { PhotoService } from './photo.service';
+import { PhotoReactionsModule } from 'src/photo-reaction/photo-reactions.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Photo]),
     forwardRef(() => AlbumModule),
     forwardRef(() => UserModule),
+    forwardRef(() => PhotoReactionsModule),
   ],
   controllers: [PhotoController],
   providers: [PhotoService],

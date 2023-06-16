@@ -5,6 +5,8 @@ import { AlbumService } from 'src/album/album.service';
 import { UserService } from 'src/user/user.service';
 import { Repository } from 'typeorm';
 import { Photo } from './photo.entity';
+import { PhotoReactionsService } from 'src/photo-reaction/photo-reactions.service';
+import { PhotoResponse } from './dto/photo-response';
 
 @Injectable()
 export class PhotoService {
@@ -12,6 +14,7 @@ export class PhotoService {
     @InjectRepository(Photo) private photoRepository: Repository<Photo>,
     private albumService: AlbumService,
     private userService: UserService,
+    private photoReactionService: PhotoReactionsService,
   ) {}
 
   //Upload new Photo
@@ -46,7 +49,10 @@ export class PhotoService {
 
   // Get photo by id
   async findById(id: number) {
-    return this.photoRepository.findOneBy({ id });
+    const photo = await this.photoRepository.findOneBy({ id });
+    const like = await this.photoReactionService.countLike(id);
+    const cmt = await this.photoReactionService.listComment(id);
+    return new PhotoResponse(photo, like, cmt);
   }
 
   //Get user's photos
@@ -62,7 +68,14 @@ export class PhotoService {
     return data;
   }
   //Get new-feed
-  async getNewFeed() {
-    const data = await this.photoRepository.createQueryBuilder('photo');
+  async getNewFeed(offset, limit) {
+    const data = await this.photoRepository
+      .createQueryBuilder('photo')
+      .orderBy('updated_at', 'DESC')
+      .skip(offset - 1)
+      .take(limit)
+      .getMany();
+
+    return data;
   }
 }

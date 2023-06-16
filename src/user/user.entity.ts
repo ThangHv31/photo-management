@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { Album } from 'src/album/album.entity';
 import { BaseEntity } from 'src/base/base-entity.entity';
 import { Photo } from 'src/photos/photo.entity';
@@ -15,14 +16,18 @@ import {
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   public id: Long;
+  @Column({ nullable: true })
+  public name: string;
   @Column()
-  public name: String;
+  @Column({ nullable: true })
+  public username: string;
+
   @Column()
-  public username: String;
+  public password: string;
+
   @Column()
-  public password: String;
-  @Column()
-  public email: String;
+  public email: string;
+
   @OneToMany(() => Photo, (photo) => photo.user)
   photos: Photo[];
   @ManyToMany(() => Album)

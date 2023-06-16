@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Session } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './user.entity';
 
 @Injectable()
@@ -14,15 +15,13 @@ export class UserService {
 
   async createUser(userDto: CreateUserDto) {
     const user = this.userRepository.create({
-      name: userDto.name,
-      username: userDto.username,
       email: userDto.email,
       password: userDto.password,
     });
     return this.userRepository.save(user);
   }
 
-  async updateUser(id: number, userDto: CreateUserDto) {
+  async updateUser(id: number, userDto: UpdateUserDto) {
     const user = await this.findOne(id);
     if (user == null) {
       throw new Error('User not exist!');
@@ -65,5 +64,8 @@ export class UserService {
       .take(limit)
       .getMany();
     return data;
+  }
+  async getCurrentUser(@Session() session: any) {
+    return await this.findOne(session.userId);
   }
 }

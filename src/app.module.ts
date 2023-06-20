@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Album } from './album/album.entity';
-import { AlbumModule } from './album/album.module';
-import { AuthModule } from './auth/auth.module';
-import { PhotoReactions } from './photo-reaction/photo-reactions.entity';
-import { PhotoReactionsModule } from './photo-reaction/photo-reactions.module';
-import { Photo } from './photos/photo.entity';
-import { PhotoModule } from './photos/photo.module';
-import { User } from './user/user.entity';
-import { UserModule } from './user/user.module';
+import { Album } from './modules/albums/album.entity';
+import { AlbumModule } from './modules/albums/album.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { PhotoReactions } from './modules/photo-reactions/photo-reactions.entity';
+import { PhotoReactionsModule } from './modules/photo-reactions/photo-reactions.module';
+import { Photo } from './modules/photos/photo.entity';
+import { PhotoModule } from './modules/photos/photo.module';
+import { User } from './modules/users/user.entity';
+import { UserModule } from './modules/users/user.module';
 
 @Module({
   imports: [
@@ -30,5 +30,6 @@ import { UserModule } from './user/user.module';
   ],
   controllers: [],
   providers: [],
+  exports: [],
 })
 export class AppModule {}

@@ -1,3 +1,4 @@
+import { MailerModule } from '@nestjs-modules/mailer';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Album } from './modules/albums/album.entity';
@@ -21,6 +22,19 @@ import { UserModule } from './modules/users/user.module';
       password: '110620',
       entities: [User, Photo, Album, PhotoReactions],
       synchronize: true,
+    }),
+    MailerModule.forRoot({
+      transport: {
+        host: 'smtp.gmail.com',
+        secure: false,
+        auth: {
+          user: 'hoangthangmucf@gmail.com',
+          pass: 'nifdjmlxksghdcjy',
+        },
+        tls: {
+          rejectUnauthorized: false,
+        },
+      },
     }),
     UserModule,
     AuthModule,

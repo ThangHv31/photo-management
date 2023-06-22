@@ -68,4 +68,7 @@ export class UserService {
   async getCurrentUser(@Session() session: any) {
     return await this.findOne(session.userId);
   }
+  async saveUser(user: User) {
+    return this.userRepository.save(user);
+  }
 }

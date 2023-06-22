@@ -14,6 +14,7 @@ import { UserService } from './user.service';
     forwardRef(() => AlbumModule),
     forwardRef(() => PhotoReactionsModule),
   ],
+
   controllers: [UserController],
   providers: [UserService],
   exports: [UserService],

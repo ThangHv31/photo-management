@@ -1,5 +1,4 @@
 import {
-  Body,
   Controller,
   Get,
   Param,
@@ -10,8 +9,8 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBearerAuth, ApiConsumes } from '@nestjs/swagger';
-import { PhotoService } from './photo.service';
 import { storageAvatarConfig } from '../../configs/file.config';
+import { PhotoService } from './photo.service';
 
 @Controller('photo')
 @ApiBearerAuth()

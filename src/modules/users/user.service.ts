@@ -41,16 +41,28 @@ export class UserService {
   async findOne(id: number) {
     return this.userRepository.findOneBy({ id: id });
   }
+  async getUserDetail(id: number) {
+    return await this.userRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.albums', 'album')
+      .where('user.id = :id ', { id: id })
+      .getOne();
+  }
 
   async findByIds(ids: number[]) {
     return await this.userRepository
       .createQueryBuilder('user')
+      .leftJoinAndSelect('user.albums', 'album')
       .where('user.id in (:ids) ', { ids: ids })
       .getMany();
   }
 
   async find(email: String) {
-    const user = await this.userRepository.findOneBy({ email: email as any });
+    const user = await this.userRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.albums', 'album')
+      .where('user.email = :email ', { email: email })
+      .getOne();
     return user;
   }
   // Get by user
@@ -70,5 +82,8 @@ export class UserService {
   }
   async saveUser(user: User) {
     return this.userRepository.save(user);
+  }
+  async saveAllUser(users: User[]) {
+    return this.userRepository.save(users);
   }
 }

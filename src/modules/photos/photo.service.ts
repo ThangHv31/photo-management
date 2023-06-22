@@ -60,7 +60,7 @@ export class PhotoService {
       .createQueryBuilder('photo')
       .where('photo.user.id = :id ', { id: userId })
       .orderBy('updated_at', 'DESC')
-      .skip(offset - 1)
+      .skip(Number(offset - 1))
       .take(limit)
       .getMany();
 
@@ -71,7 +71,7 @@ export class PhotoService {
     const data = await this.photoRepository
       .createQueryBuilder('photo')
       .orderBy('updated_at', 'DESC')
-      .skip(offset - 1)
+      .skip(Number(offset - 1))
       .take(limit)
       .getMany();
 

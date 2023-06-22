@@ -1,14 +1,7 @@
-import {
-  BaseEntity,
-  Column,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Album } from '../albums/album.entity';
 import { Photo } from '../photos/photo.entity';
+import { BaseEntity } from '../base/base-entity.entity';
 
 @Entity('user')
 export class User extends BaseEntity {

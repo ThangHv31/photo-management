@@ -47,4 +47,8 @@ export class UserController {
     });
     return response;
   }
+  @Get('/new-feed')
+  async getNewFeed(@Query() { offset, limit }: PaginationParams) {
+    return await this.photoService.getNewFeed(offset, limit);
+  }
 }

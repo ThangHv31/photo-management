@@ -1,5 +1,6 @@
-import { BaseEntity, Column, Entity, Long, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Album } from '../albums/album.entity';
+import { BaseEntity } from '../base/base-entity.entity';
 import { User } from '../users/user.entity';
 
 @Entity('photo')

@@ -3,6 +3,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   Session,
   UploadedFile,
   UseInterceptors,
@@ -21,11 +22,11 @@ export class PhotoController {
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('file', { storage: storageAvatarConfig }))
   async uploadAvatar(
-    @Param('id') id,
+    @Query('albumId') albumId,
     @UploadedFile() file: Express.Multer.File,
     @Session() session: any,
   ) {
-    return await this.photoService.uploadPhoto(id, file, session.userId);
+    return await this.photoService.uploadPhoto(albumId, file, session.userId);
   }
 
   @Get()
@@ -37,7 +38,4 @@ export class PhotoController {
   async getPhotoById(@Param('id') id) {
     return await this.photoService.findById(id);
   }
-
-  @Get('/new-feed')
-  async getNewFeed() {}
 }

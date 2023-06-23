@@ -14,6 +14,7 @@ import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UserService } from '../users/user.service';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
+import { MAIL_USER_NAME } from 'src/const/constants';
 
 const scrypt = promisify(_scrypt);
 @Injectable()
@@ -67,7 +68,7 @@ export class AuthService {
     });
     const link = `http://localhost:3000/auth/change-password?token=${token}`;
     await this.mailService.sendMail({
-      from: 'hoangthangmucf@gmail.com',
+      from: MAIL_USER_NAME,
       to: user.email,
       subject: 'Forgot Password',
       html: `

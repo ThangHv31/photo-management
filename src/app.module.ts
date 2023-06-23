@@ -10,6 +10,7 @@ import { Photo } from './modules/photos/photo.entity';
 import { PhotoModule } from './modules/photos/photo.module';
 import { User } from './modules/users/user.entity';
 import { UserModule } from './modules/users/user.module';
+import { MAIL_HOST, MAIL_PASSWORD, MAIL_USER_NAME } from './const/constants';
 
 @Module({
   imports: [
@@ -25,11 +26,11 @@ import { UserModule } from './modules/users/user.module';
     }),
     MailerModule.forRoot({
       transport: {
-        host: 'smtp.gmail.com',
+        host: MAIL_HOST,
         secure: false,
         auth: {
-          user: 'hoangthangmucf@gmail.com',
-          pass: 'nifdjmlxksghdcjy',
+          user: MAIL_USER_NAME,
+          pass: MAIL_PASSWORD,
         },
         tls: {
           rejectUnauthorized: false,
